@@ -1,22 +1,55 @@
-import axios from "axios";
+import API from "./api";
 
-const API = axios.create({
-  baseURL: "https://moneyfulpublicpolicy.co.kr",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
+//회원가입
 export const register = async (userData) => {
-  const response = await API.post(`/register`, userData);
-  return response.data;
+  try {
+    const response = await API.post("/register", userData);
+    return response.data;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
 };
 
+//로그인
 export const login = async (userData) => {
-  const res = await API.post("/login", userData);
-  return res.data;
+  try {
+    const res = await API.post("/login", userData);
+    const { userId, nickname } = res.data;
+
+    localStorage.setItem("user", JSON.stringify({ userId, nickname }));
+    return { userId, nickname };
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
 };
 
-export const getUserProfile = async (token) => {};
+//프로필 조회
+export const getUserProfile = async () => {
+  try {
+    const res = await API.get("/user");
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
-export const updateProfile = async (formData) => {};
+//프로필 업데이트
+export const updateProfile = async (nickname) => {
+  try {
+    const formData = new FormData();
+    formData.set("nickname", nickname);
+
+    const res = await API.patch("/profile", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

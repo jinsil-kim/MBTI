@@ -1,17 +1,19 @@
-import React from "react";
 import AuthForm from "../components/AuthForm";
 import { register } from "../api/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
-  // 완성된 로직들이 아니에요! 참고만 하세요!
   const handleSignup = async (formData) => {
     try {
       await register(formData);
+      console.log("formData", formData);
+      toast.success("회원가입을 축하합니다!");
+      nav("/login");
     } catch (error) {
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      toast.error("회원가입에 실패했습니다. 다시 시도해주세요.");
     }
   };
 

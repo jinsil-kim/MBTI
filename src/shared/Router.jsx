@@ -6,7 +6,8 @@ import Profile from "../pages/Profile";
 import TestPage from "../pages/Test";
 import TestResult from "../pages/TestResult";
 import TestResultList from "../pages/TestResultList";
-// import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../components/ProtectedRoute";
+import Layout from "../components/Layout";
 
 const Router = () => {
   return (
@@ -14,13 +15,16 @@ const Router = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <Route element={<ProtectedRoute />}> */}
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/test-page" element={<TestPage />} />
-          <Route path="/test-result" element={<TestResult />} />
-          <Route path="/test-resul-list" element={<TestResultList />} />
-        {/* </Route> */}
+
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/test" element={<TestPage />} />
+            <Route path="/result" element={<TestResult />} />
+            <Route path="/resul-list" element={<TestResultList />} />
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
