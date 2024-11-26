@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { questions } from "../data/questions";
 
 const TestForm = ({ onSubmit }) => {
   const [answers, setAnswers] = useState(
-    Array(questions.length).fill({ type: "", answer: "" }),
+    Array(questions.length).fill({ type: "", answer: "" })
   );
 
-  const handleChange = (index, answer) => {
+  const handleChange = (index, value) => {
     const newAnswers = [...answers];
-    newAnswers[index] = { type: questions[index].type, answer };
+    newAnswers[index] = { type: questions[index].type, answer: value };
     setAnswers(newAnswers);
   };
 
@@ -46,7 +46,7 @@ const TestForm = ({ onSubmit }) => {
       ))}
       <button
         type="submit"
-        className="w-full bg-primary-color text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 hover:text-[#FF5A5F]"
+        className="w-full bg-slate-300 py-3 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 hover:bg-[#FF5A5F]"
       >
         제출하기
       </button>

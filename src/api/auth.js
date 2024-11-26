@@ -40,7 +40,7 @@ export const getUserProfile = async () => {
 export const updateProfile = async (nickname) => {
   try {
     const formData = new FormData();
-    formData.set("nickname", nickname);
+    formData.append("nickname", nickname);
 
     const res = await API.patch("/profile", formData, {
       headers: {

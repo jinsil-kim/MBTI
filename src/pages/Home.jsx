@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="container mx-auto pt-10 main">
+    <div className="container mx-auto main flex flex-col items-center gap-3">
       <h1 className="text-5xl font-bold text-primary-color mb-6">
         무료 성격 테스트
       </h1>
@@ -37,7 +37,9 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <Link to="/login">내 성격 알아보러 가기</Link>
+      <Link to="/login" className="p-4 bg-red-500 rounded-full text-white">
+        내 성격 알아보러 가기
+      </Link>
     </div>
   );
 };
