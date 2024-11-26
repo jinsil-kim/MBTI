@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { getUserProfile, updateProfile } from "../api/auth";
 import { toast } from "react-toastify";
 
-const Profile = ({ user, setUser }) => {
-  const [nickname, setNickname] = useState(user?.nickname || "");
+const Profile = () => {
+  const [nickname, setNickname] = useState("");
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const FetchProfile = async () => {
       try {
-        const profile = await getUserProfile();
+        const profile = await getUserProfile(currentUser.accessToken);
         setNickname(profile.nickname);
       } catch (error) {
         console.error(error);
@@ -24,16 +25,20 @@ const Profile = ({ user, setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user) {
+      if (!currentUser) {
         toast.error("로그인을 해주세요");
         return;
       }
 
-      
+      const data = await updateProfile(nickname, currentUser.accessToken);
+      if (data.success) {
+        alert("변경성공");
+        const updatedUser = { ...currentUser, nickname: data.nickname };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+      }
     } catch (error) {
-      console.error(error.message);
       toast.error("프로필 업데이트 실패");
+      console.error(error.response?.data || error.message);
     }
   };
 

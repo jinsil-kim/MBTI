@@ -37,7 +37,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <Link to="/login" className="p-4 bg-red-500 rounded-full text-white">
+      <Link to="/test" className="p-4 bg-red-500 rounded-full text-white">
         내 성격 알아보러 가기
       </Link>
     </div>

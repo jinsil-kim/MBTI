@@ -1,23 +1,27 @@
 import { useState } from "react";
-import TestForm from "../components/TestForm";
-import { calculateMBTI, mbtiDescriptions } from "../utils/mbtiCalculator";
-import { createTestResult } from "../api/testResults";
+
+import { calculateMBTI, mbtiDescriptions } from "../utils/mbtiCalaulator";
+import { createTestResult } from "../api/testResult";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import TestForm from "../components/TestForm";
 
-const TestPage = ({ user }) => {
+const TestPage = () => {
   const navigate = useNavigate();
   const [result, setResult] = useState(null);
 
   const handleTestSubmit = async (answers) => {
+    const user = JSON.parse(localStorage.getItem("user"));
     const mbtiResult = calculateMBTI(answers);
-
+    setResult(mbtiResult);
     try {
       const res = await createTestResult({
         userId: user.id,
         result: mbtiResult,
         visibility: true,
         username: user.nickname,
+        createdAt: new Date().toISOString(),
+        description: mbtiDescriptions[mbtiResult],
       });
 
       if (res.success) {
@@ -28,7 +32,7 @@ const TestPage = ({ user }) => {
       }
     } catch (error) {
       console.error(error.message);
-      toast.error("결과 저장 개같이 실패");
+      toast.error("결과 저장 실패");
     }
   };
 
@@ -42,9 +46,9 @@ const TestPage = ({ user }) => {
         {!result ? (
           <>
             <h1 className="text-3xl font-bold text-primary-color mb-6">
-              MBTI 테스트
+              MBTI 테스트 테스트
             </h1>
-            <TestForm onSubmit={handleTestSubmit} />
+            <TestForm onSubmit={handleTestSubmit} a={"a"} />
           </>
         ) : (
           <>

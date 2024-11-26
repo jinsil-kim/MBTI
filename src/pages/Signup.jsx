@@ -18,7 +18,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div>
         <AuthForm mode="signup" onSubmit={handleSignup} />
         <div className="mt-4">
