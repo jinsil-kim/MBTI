@@ -16,7 +16,7 @@ const TestPage = () => {
     setResult(mbtiResult);
     try {
       const res = await createTestResult({
-        userId: user.id,
+        userId: user.userId,
         result: mbtiResult,
         visibility: true,
         username: user.nickname,
@@ -37,7 +37,7 @@ const TestPage = () => {
   };
 
   const handleNavigateToResults = () => {
-    navigate("/results");
+    navigate("/result");
   };
 
   return (
@@ -48,7 +48,7 @@ const TestPage = () => {
             <h1 className="text-3xl font-bold text-primary-color mb-6">
               MBTI 테스트 테스트
             </h1>
-            <TestForm onSubmit={handleTestSubmit} a={"a"} />
+            <TestForm onSubmit={handleTestSubmit} />
           </>
         ) : (
           <>

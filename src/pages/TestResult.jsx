@@ -23,7 +23,7 @@ const TestResult = () => {
         <h1 className="text-3xl font-bold text-primary-color mb-10 text-center">
           모든 테스트 결과
         </h1>
-        <TestResultList results={results} />
+        <TestResultList results={results} setResults={setResults} />
       </div>
     </div>
   );
