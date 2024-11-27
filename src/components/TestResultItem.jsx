@@ -5,9 +5,8 @@ import {
 } from "../api/testResult";
 
 const TestResultItem = ({ results, onUpdate, currentUser }) => {
-  const { username, description, createdAt, result, visibility, userId } =
+  const { username, description, createdAt, result, visibility, userId, id } =
     results;
-  console.log("visibility", visibility);
 
   const isLogin = currentUser?.userId === userId;
 
@@ -16,13 +15,16 @@ const TestResultItem = ({ results, onUpdate, currentUser }) => {
   const handleToggleVisibility = async () => {
     setLoading(true);
     try {
-      const updatedVisibility = !visibility;
+      // const updatedVisibility = !visibility;
 
-      //서버 visibility 상태 업데이트
-      await updateTestResultVisibility(results.id, updatedVisibility);
+      // //서버 visibility 상태 업데이트
+      // await updateTestResultVisibility(results.id, updatedVisibility);
 
-      //프론트엔드 visibility 상태 업데이트
-      onUpdate(results.id, updatedVisibility);
+      // //프론트엔드 visibility 상태 업데이트
+      // onUpdate(results.id, { visibility: updatedVisibility });
+
+      const updatedResult = await updateTestResultVisibility(id, !visibility);
+      onUpdate(id, updatedResult); // 상태 갱신
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -34,9 +36,9 @@ const TestResultItem = ({ results, onUpdate, currentUser }) => {
     setLoading(true);
     try {
       //서버 삭제 상태 업데이트
-      await deleteTestResult(results.id);
+      await deleteTestResult(id);
       //프론트엔드 삭제 상태 업데이트
-      onUpdate(results.id);
+      onUpdate(id, null);
     } catch (error) {
       console.error(error.message);
     } finally {
