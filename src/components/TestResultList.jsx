@@ -3,18 +3,6 @@ import TestResultItem from "./TestResultItem";
 const TestResultList = ({ results, setResults }) => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  // const updateVisibility = (id, updatedVisibility) => {
-  //   setResult((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id ? { ...item, visibility: updatedVisibility } : item
-  //     )
-  //   );
-  // };
-
-  // const deleteResult = (id) => {
-  //   setResult((prev) => prev.filter((item) => item.id !== id));
-  // };
-
   const handleUpdate = (id, updatedResult) => {
     if (updatedResult === null) {
       // 삭제된 결과 제거

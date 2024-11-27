@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   deleteTestResult,
   updateTestResultVisibility,
@@ -10,30 +9,20 @@ const TestResultItem = ({ results, onUpdate, currentUser }) => {
 
   const isLogin = currentUser?.userId === userId;
 
-  const [loading, setLoading] = useState(false);
-
   const handleToggleVisibility = async () => {
-    setLoading(true);
     try {
-      // const updatedVisibility = !visibility;
+      // 서버에서 visibility 상태를 토글
+      const updatedVisibility = !visibility; // 토글 상태 결정
+      await updateTestResultVisibility(id, updatedVisibility);
 
-      // //서버 visibility 상태 업데이트
-      // await updateTestResultVisibility(results.id, updatedVisibility);
-
-      // //프론트엔드 visibility 상태 업데이트
-      // onUpdate(results.id, { visibility: updatedVisibility });
-
-      const updatedResult = await updateTestResultVisibility(id, !visibility);
-      onUpdate(id, updatedResult); // 상태 갱신
+      // 기존 결과 상태를 업데이트하여 프론트엔드에 반영
+      onUpdate(id, { ...results, visibility: updatedVisibility });
     } catch (error) {
       console.error(error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    setLoading(true);
     try {
       //서버 삭제 상태 업데이트
       await deleteTestResult(id);
@@ -41,8 +30,6 @@ const TestResultItem = ({ results, onUpdate, currentUser }) => {
       onUpdate(id, null);
     } catch (error) {
       console.error(error.message);
-    } finally {
-      setLoading(false);
     }
   };
 
