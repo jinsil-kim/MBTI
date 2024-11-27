@@ -3,7 +3,7 @@ import TestResultItem from "./TestResultItem";
 const TestResultList = ({ results }) => {
   console.log("results22", results);
   return (
-    <div>
+    <div className="space-y-6">
       {results.map((item) => {
         return <TestResultItem key={item.id} results={item} />;
       })}

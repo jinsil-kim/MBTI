@@ -8,8 +8,7 @@ const Signup = () => {
 
   const handleSignup = async (formData) => {
     try {
-      await register(formData);
-      console.log("formData", formData);
+      await register(formData); //서버에 사용자 데이터 전송
       toast.success("회원가입을 축하합니다!");
       nav("/login");
     } catch (error) {
@@ -23,7 +22,7 @@ const Signup = () => {
         <AuthForm mode="signup" onSubmit={handleSignup} />
         <div className="mt-4">
           <p className="text-gray-600">
-            이미 계정이 있으신가요?{" "}
+            이미 계정이 있으신가요?
             <Link to="/login" className="text-red-500">
               로그인
             </Link>

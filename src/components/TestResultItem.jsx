@@ -1,6 +1,13 @@
+
 const TestResultItem = ({ results }) => {
-  console.log("results", results);
-  const { username, description, createdAt, result } = results;
+  const { username, description, createdAt, result, visibility, userId } =
+    results;
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const isLogin = currentUser?.id === userId;
+
+
+
   return (
     <div className="p-6 bg-gray-800 rounded-lg shadow-lg text-white">
       <div className="flex justify-between items-center border-b border-gray-700 pb-3 mb-3">
@@ -11,6 +18,8 @@ const TestResultItem = ({ results }) => {
       </div>
       <p className="text-2xl font-bold text-yellow-400 mb-4">{result}</p>
       <p className="text-base text-gray-300 mb-4">{description}</p>
+      <button>{visibility ? "공개" : "비공개"}</button>
+      <button>삭제</button>
     </div>
   );
 };
