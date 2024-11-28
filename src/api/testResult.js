@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/testResults";
+const API_URL = "https://husky-sneaky-jay.glitch.me/testResults";
 
 // GET: 테스트 결과 목록 가져오기
 export const getTestResults = async () => {
