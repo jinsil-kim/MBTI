@@ -16,7 +16,7 @@ const Profile = () => {
       }
     };
     FetchProfile();
-  }, []);
+  }, [currentUser.accessToken]);
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
