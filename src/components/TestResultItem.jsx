@@ -46,10 +46,18 @@ const TestResultItem = ({ results, onUpdate, currentUser }) => {
 
       {isLogin && (
         <div className="flex justify-between">
-          <button onClick={handleToggleVisibility}>
+          <button
+            onClick={handleToggleVisibility}
+            className="bg-blue-500 py-2 px-4 rounded-lg text-sm hover:bg-blue-600 transition"
+          >
             {visibility ? "비공개" : "공개"}
           </button>
-          <button onClick={handleDelete}>삭제</button>
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 py-2 px-4 rounded-lg text-sm hover:bg-red-600 transition"
+          >
+            삭제
+          </button>
         </div>
       )}
     </div>

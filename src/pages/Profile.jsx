@@ -32,7 +32,7 @@ const Profile = () => {
 
       const data = await updateProfile(nickname, currentUser.accessToken);
       if (data.success) {
-        alert("변경성공");
+        toast.success("변경성공");
         const updatedUser = { ...currentUser, nickname: data.nickname };
         localStorage.setItem("user", JSON.stringify(updatedUser));
       }
