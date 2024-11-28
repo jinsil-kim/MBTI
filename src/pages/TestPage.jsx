@@ -41,7 +41,7 @@ const TestPage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
       <div className="bg-white rounded-lg p-8 max-w-lg w-full h-full overflow-y-auto">
         {!result ? (
           <>
