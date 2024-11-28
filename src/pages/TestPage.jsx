@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { calculateMBTI, mbtiDescriptions } from "../utils/mbtiCalaulator";
 import { createTestResult } from "../api/testResult";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +10,14 @@ const TestPage = () => {
   const [result, setResult] = useState(null);
 
   const handleTestSubmit = async (answers) => {
+    // 로컬스토리지에서 유저 데이터 가져오기
     const user = JSON.parse(localStorage.getItem("user"));
+    // mbti 테스트 결과값 가져옴
     const mbtiResult = calculateMBTI(answers);
+    // mbti 결과값을 화면에 랜더링해주기
     setResult(mbtiResult);
+
+    // db에 저장될 테스트 결과 데이터 객체 생성
     try {
       const res = await createTestResult({
         userId: user.userId,
@@ -24,18 +28,20 @@ const TestPage = () => {
         description: mbtiDescriptions[mbtiResult],
       });
 
+      // db에 결과값 저장시
       if (res.success) {
         setResult(mbtiResult);
         toast.success("mbti 결과가 저장되었습니다.");
       } else {
         toast.error("결과 저장에 실패했습니다.");
       }
-    } catch (error) {
+    } catch (error) { // db에 결과값 저장 실패시
       console.error(error.message);
       toast.error("결과 저장 실패");
     }
   };
 
+  // 결과 페이지로 이동
   const handleNavigateToResults = () => {
     navigate("/result");
   };

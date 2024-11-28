@@ -8,8 +8,8 @@ const TestResult = () => {
   useEffect(() => {
     const fetchTestResult = async () => {
       try {
-        const fetchResult = await getTestResults();
-        setResults(fetchResult);
+        const fetchResult = await getTestResults(); // 테스트 결과 데이터 가져오기
+        setResults(fetchResult); // 가져온 데이터를 state에 저장하기
       } catch (error) {
         console.error(error.message);
       }

@@ -9,6 +9,7 @@ const AuthForm = ({ mode, onSubmit }) => {
     nickname: "",
   });
 
+  // 입력값 받기
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -17,6 +18,7 @@ const AuthForm = ({ mode, onSubmit }) => {
     }));
   };
 
+  // 인풋값 받아서 submit하면 화면 리랜더링
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);

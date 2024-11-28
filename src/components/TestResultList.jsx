@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import TestResultItem from "./TestResultItem";
 
 const TestResultList = ({ results, setResults }) => {
+  // 로컬스토리지에서 현재 사용자 정보 가져오기
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const handleUpdate = (id, updatedResult) => {
@@ -24,6 +25,7 @@ const TestResultList = ({ results, setResults }) => {
   return (
     <div className="space-y-6">
       {results
+      // 공개 여부가 true || 현재 유저가 해당 유저인지에 따른 필터링
         .filter(
           (result) => result.visibility || result.userId === currentUser.userId
         )
