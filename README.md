@@ -53,5 +53,7 @@
 	<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=flat&logo=tailwindcss&logoColor=white" />
 </div>
 
+## 🌏 디랙토리
 
+![alt text](image.png)
 
