@@ -11,7 +11,7 @@ const Login = () => {
       toast.success(`로그인 성공! ${nickname}님 환영합니다`);
       nav("/");
     } catch (error) {
-      console.error(error.message);
+      toast.error(error.message);
     }
   };
 
