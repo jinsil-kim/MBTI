@@ -6,7 +6,6 @@ const LoginNav = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("token");
     toast.success("로그아웃");
     nav("/login");
   };
