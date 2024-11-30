@@ -44,11 +44,8 @@ export const getUserProfile = async (token) => {
 };
 
 //프로필 업데이트
-export const updateProfile = async (nickname, token) => {
+export const updateProfile = async (formData, token) => {
   try {
-    const formData = new FormData();
-    formData.append("nickname", nickname);
-
     const res = await API.patch("/profile", formData, {
       headers: {
         "Content-Type": "multipart/form-data",

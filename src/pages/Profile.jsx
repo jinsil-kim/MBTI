@@ -7,7 +7,7 @@ const Profile = () => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    const FetchProfile = async () => {
+    const fetchProfile = async () => {
       try {
         const profile = await getUserProfile(currentUser.accessToken);
         setNickname(profile.nickname);
@@ -15,7 +15,7 @@ const Profile = () => {
         console.error(error);
       }
     };
-    FetchProfile();
+    fetchProfile();
   }, [currentUser.accessToken]);
 
   const handleNicknameChange = (e) => {
@@ -30,7 +30,7 @@ const Profile = () => {
         return;
       }
 
-      const data = await updateProfile(nickname, currentUser.accessToken);
+      const data = await updateProfile({ nickname }, currentUser.accessToken);
       if (data.success) {
         toast.success("변경성공");
         const updatedUser = { ...currentUser, nickname: data.nickname };
